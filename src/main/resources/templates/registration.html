@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Регистрация</title>
+    <style type="text/css">
+    label {
+        display: inline-block;
+        width: 200px;
+        margin: 5px;
+        text-align: left;
+    }
+    input [type=text]{
+        display: inline-block;
+        width: 200px;
+    }
+
+    input [type=password]{
+        display: inline-block;
+        width: 200px;
+    }
+
+    button {
+        padding: 5px;
+        margin: 10px;
+    }
+</style>
+
+</head>
+
+<body>
+<div th:replace="~{navigation :: navi(Home)}"></div>
+
+<div align="center">
+        <h2>Регистрация</h2>
+        <form action="#" th:action="@{/registration}" method="post" th:object="${userForm}">
+            <div th:if ="${passwordError != null}">
+                <span>Пароли не совпадают</span>
+                <br></br>
+            </div>
+            <div th:if="${usernameError != null}">
+                <span>Пользователь с таким именем уже существует</span>
+                <br></br>
+            </div>
+
+
+
+            <label>Username:</label>
+            <input type="text" th:field="*{username}"/><br>
+
+            <label>Password:</label>
+            <input type="password" th:field="*{password}"/><br>
+
+            <label>PasswordConfirm:</label>
+            <input type="password" th:field="*{passwordConfirm}"/><br>
+
+                    <button type="submit">Зарегистрироваться</button>
+
+        </form>
+    <a href="/">Главная</a>
+</div>
+</body>
+</html>
+
+
