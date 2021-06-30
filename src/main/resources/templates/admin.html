@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Log in with your account</title>
+<!--    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/style.css">-->
+</head>
+
+<body>
+<div align="center">
+    <table>
+        <thead>
+        <th>ID</th>
+        <th>UserName</th>
+        <th>Password</th>
+        <th>Roles</th>
+        </thead>
+        <tr th:each="user : ${allUsers}" >
+                <td th:text="${user.id}">ID</td>
+                <td th:text="${user.username}">UserName</td>
+                <td th:text="${user.password}">Password</td>
+                <td>
+                    <a th:each ="role : ${user.roles}">${role.name}</a>
+                </td>
+                <td>
+                    <form action="${pageContext.request.contextPath}/admin" method="post">
+                        <input type="hidden" name="userId" value="${user.id}"/>
+                        <input type="hidden" name="action" value="delete"/>
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+        </tr>
+    </table>
+    <a href="/">Главная</a>
+</div>
+</body>
+</html>
+
