@@ -4,6 +4,9 @@ import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,9 +21,11 @@ public class Role implements GrantedAuthority {
     @Column(name = "name")
     private String name;
 
-    @Transient
+//    @Transient
     @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+//    private Set<User> users = new HashSet<>();
+    private List<User> users = new ArrayList<>();
+
 
     public Role(Long id, String name) {
         this.id = id;

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 
 <!--suppress RequiredAttributes -->
-<html xmlns:th="http://www.thymeleaf.org">
-<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org/extras/spring-security
+http://www.thymeleaf.org/extras/spring-security ">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
@@ -16,7 +17,7 @@
 <div class="fluid-container" th:fragment="navi(activeTab)">
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary ">
         <!--<a class="navbar-brand" href="#">GeekMarket</a>-->
-<!--        <img th:src="@{/images/icon.png}" />-->
+        <!--        <img th:src="@{/images/icon.png}" />-->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -24,13 +25,14 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li sec:authorize="hasRole('ADMIN')" class="nav-item">
-                    <a class="nav-link" th:href="@{/admin}">Управление</a>
+                    <a class="nav-link" th:href="@{/admin/users}">Управление</a>
                 </li>
-<!--                <li class="nav-item" th:classappend="${activeTab == 'Home' ? 'active' : ''}">-->
-<!--                    <a class="nav-link" th:href="@{/}">@GeekMarket<span class="sr-only">(current)</span></a>-->
-<!--                </li>-->
+                <!--                <li class="nav-item" th:classappend="${activeTab == 'Home' ? 'active' : ''}">-->
+                <!--                    <a class="nav-link" th:href="@{/}">@GeekMarket<span class="sr-only">(current)</span></a>-->
+                <!--                </li>-->
                 <li class="nav-item" th:classappend="${activeTab == 'Product' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/product/listProducts}">Каталог товаров<span class="sr-only">(current)</span></a>
+<!--                    <a class="nav-link" th:href="@{/product/listProducts}">Каталог товаров<span class="sr-only">(current)</span></a>-->
+                    <a class="nav-link" th:href="@{/category/list}">Каталог товаров<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item" th:classappend="${activeTab == 'ShoppingCart' ? 'active' : ''}">
                     <a class="nav-link" th:href="@{/cart}">Корзина<span class="sr-only">(current)</span></a>
