@@ -14,9 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -80,17 +78,41 @@ public class UserService implements UserDetailsService {
         if (userFromDb != null) {
             return false;
         }
-        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+//        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+//        Set<Role> roles = new HashSet<>();
+//        roles.add(new Role(1L, "ROLE_USER"));
+        user.addRoles(roleRepo.findByName("ROLE_USER"));
+//        user.setRoles(roles);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepo.save(user);
         return true;
     }
 
     public boolean deleteUser(Long userId) {
-        if (userRepo.findById(userId) != null) {
-            userRepo.deleteById(userId);
+        User user = userRepo.findById(userId);
+        if (user != null) {
+            userRepo.delete(user);
             return true;
         }
         return false;
     }
+
+    public boolean editUser(Long userId) {
+        User user = userRepo.findById(userId);
+        if (user != null) {
+//            Set<Role> roles = user.getRoles();
+//            roles.add(new Role(2L,"ROLE_ADMIN"));
+            user.addRoles(roleRepo.findByName("ROLE_ADMIN"));
+//            user.setRoles(roles);
+            userRepo.save(user);
+//            for (Role role: roles){
+//                System.out.println(role.getName());
+//            }
+//            Role role = roleRepo.findByName("ROLE_ADMIN");
+//            role.getUsers().add(user);
+            return true;
+        }
+        return false;
+    }
+
 }

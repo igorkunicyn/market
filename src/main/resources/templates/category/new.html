@@ -2,15 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-<!--    <meta charset="utf-8" />-->
-    <title>Добавление нового продукта</title>
+    <title>Добавление новой категории товара</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/dist/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/min.js}"></script>
     <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
-    <link type="text/css" rel="stylesheet" th:href="@{/css/main.css}"/>
 
 </head>
 <body>
@@ -18,26 +15,19 @@
 <div th:replace="~{navigation :: navi(Product)}"></div>
 
 <div class="container" align="center">
-  <h1>Добавление нового продукта</h1>
+    <h1>Добавление новой категории товара</h1>
     <br />
-    <form action="#" th:action="@{/product/save}" th:object="${product}" method="post">
+    <form action="#" th:action="@{/category/save}" th:object="${category}" method="post">
         <table border="0" cellpadding="10">
             <tr>
                 <td>Название :</td>
-                <td><input type="text" th:field="*{title}" /></td>
+                <td><input type="text" th:field="*{name}" /></td>
             </tr>
-            <tr>
-                <td>Цена :</td>
-                <td><input type="text" th:field="*{price}" /></td>
-            </tr>
-<!--            <tr>-->
-<!--                <td>Year Exit:</td>-->
-<!--                <td><input type="text" th:field="*{year}" /></td>-->
-<!--            </tr>-->
+
             <tr>
                 <td colspan="2"><button type="submit" class="btn btn-success">Сохранить</button> </td>
             </tr>
-    </table>
+        </table>
     </form>
 
 

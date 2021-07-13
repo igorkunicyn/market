@@ -1,10 +1,9 @@
 package com.igorkunicyn.market.controllers;
 
 import com.igorkunicyn.market.entities.Product;
-import com.igorkunicyn.market.services.OrderCartService;
+import com.igorkunicyn.market.services.CartService;
 import com.igorkunicyn.market.services.ProductService;
-import com.igorkunicyn.market.utils.CartElement;
-import com.igorkunicyn.market.utils.OrderCart;
+import com.igorkunicyn.market.utils.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +19,7 @@ import java.util.List;
 public class CartController {
 
     private ProductService productService;
-    private OrderCartService orderCartService;
+    private CartService cartService;
 
     @Autowired
     public void setProductService(ProductService productService) {
@@ -28,32 +27,33 @@ public class CartController {
     }
 
     @Autowired
-    public void setShopCartService(OrderCartService orderCartService) {
-        this.orderCartService = orderCartService;
+    public void setShopCartService(CartService cartService) {
+        this.cartService = cartService;
     }
 
     @GetMapping
     public String cartPage(Model model, HttpSession httpSession) {
-        OrderCart cart = orderCartService.getCurrentCart(httpSession);
-        List<CartElement> cartElementList = cart.getCartElementList();
-        double price = orderCartService.totalPriceCart(cart);
+        Cart cart = cartService.getCurrentCart(httpSession);
+        List<Product> productList = cart.getProductList();
+        double price = cartService.totalPriceCart(cart);
         model.addAttribute("price",price);
-        model.addAttribute("cartList", cartElementList);
+        model.addAttribute("cartList", productList);
         return "cart-page";
     }
 
     @GetMapping("/add/{id}")
     public String addToCart(@PathVariable("id")Long id, HttpSession httpSession){
-        Product product = productService.getProductRepo().findProductById(id);
-        OrderCart orderCart = orderCartService.getCurrentCart(httpSession);
-        orderCartService.addCart(product, orderCart);
+        Product product = productService.getProductById(id);
+        Cart cart = cartService.getCurrentCart(httpSession);
+        cartService.addCart(product, cart);
         return "redirect:/cart";
     }
 
-    @GetMapping("/delete/{title}")
-    public String addToCart(@PathVariable("title")String title, HttpSession httpSession){
-        OrderCart orderCart = orderCartService.getCurrentCart(httpSession);
-        orderCartService.deleteFromCart(orderCart, title);
+    @GetMapping("/delete/{id}")
+    public String deleteFromCart(@PathVariable("id")Long id, HttpSession httpSession){
+        Product product = productService.getProductById(id);
+        Cart cart = cartService.getCurrentCart(httpSession);
+        cartService.deleteFromCart(cart, product);
         return "redirect:/cart";
     }
 

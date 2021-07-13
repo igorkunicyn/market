@@ -1,8 +1,11 @@
 package com.igorkunicyn.market.entities;
 
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,9 +21,31 @@ public class Order {
     @Column(name = "data")
     private Date date;
 
-    @OneToMany
-    @JoinColumn(name = "order_id")
-    private List<OrderElement> orderElements;
+    @Column(name = "number")
+    private long number;
+
+
+    @ManyToMany(cascade = {CascadeType.MERGE})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "orders_products", joinColumns = {@JoinColumn(name = "order_id")},
+    inverseJoinColumns = {@JoinColumn(name = "product_id")})
+    private List<Product> products = new ArrayList<>();
+
+    @ManyToOne()
+    @JoinColumn( name = "user_id")
+    private User user;
+
+    public void addProducts(Product product){
+        products.add(product);
+        product.getOrders().add(this);
+    }
+
+    public void removeProducts(Product product){
+        products.remove(product);
+        product.getOrders().remove(this);
+    }
+
+
 
     public Order(){}
 }

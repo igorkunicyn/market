@@ -32,5 +32,4 @@ public class UserController {
         uiModel.addAttribute("listUsers", userList);
         return "user/user-list";
     }
-
 }

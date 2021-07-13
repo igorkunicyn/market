@@ -3,7 +3,7 @@ package com.igorkunicyn.market.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-//@SuppressWarnings("ALL")
+
 @Controller
 public class MainController {
 
