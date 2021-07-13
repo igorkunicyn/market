@@ -64,13 +64,15 @@
 
             <label>Повторите пароль:</label>
             <input type="password" th:field="*{passwordConfirm}"/><br>
+            <div style="color:red" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}">Password error </div>
 
             <label for="email">Email:</label>
             <input type="email" th:field="*{email}" id="email"/><br>
             <div  style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error </div>
 
 
-             <button type="submit">Зарегистрироваться</button>
+             <button type="submit" class="btn btn-success" >Зарегистрироваться</button>
+
 
         </form>
 <!--    <a href="/">Главная</a>-->

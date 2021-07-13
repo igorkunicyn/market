@@ -45,6 +45,9 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    private List<ProductImage> images = new ArrayList<>();
+
     @Transient
     private long numberOfCategory;
 
@@ -56,6 +59,16 @@ public class Product {
     public void removeOrders(Order order){
         orders.remove(order);
         order.getProducts().remove(this);
+    }
+
+    public void addImages(ProductImage image){
+        images.add(image);
+        image.setProduct(this);
+    }
+
+    public void removeImages(ProductImage image){
+        images.remove(image);
+        image.setProduct(null);
     }
 
     public Product() {

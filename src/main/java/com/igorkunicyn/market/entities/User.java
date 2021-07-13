@@ -28,10 +28,10 @@ public class User implements UserDetails {
     //    @Size(min = 2, message = "Не меньше 5 знаков")
 
     @NotEmpty(message = "Пароль не может быть пустым")
-    @Size(min = 3, max = 10, message = "Пароль должен содеражть не менее 3 и не более 10 знаков")
     @Column(name = "password")
     private String password;
 
+    @Size(min = 3, max = 10, message = "Пароль должен содеражть не менее 3 и не более 10 знаков")
     @Transient
     private String passwordConfirm;
 

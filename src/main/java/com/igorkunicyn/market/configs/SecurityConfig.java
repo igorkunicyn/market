@@ -4,6 +4,7 @@ import com.igorkunicyn.market.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableAspectJAutoProxy
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -45,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN")
 //                .antMatchers("/news").hasRole("USER")
                 //Доступ разрешен всем пользователей
-                .antMatchers("/", "/product/list/**","/images/**","/category/list").permitAll()
+                .antMatchers("/", "/product/list/**","/images/**","/pictures/**","/category/list").permitAll()
                 //Все остальные страницы требуют аутентификации
                 .anyRequest().authenticated()
                 .and()

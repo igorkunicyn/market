@@ -23,7 +23,6 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-
     @GetMapping("")
     public String shopPage(Model model, HttpSession httpSession) {
         List<Product> productList = orderService.getListProducts(httpSession);
