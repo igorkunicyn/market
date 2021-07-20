@@ -5,6 +5,7 @@ import com.igorkunicyn.market.entities.Product;
 import com.igorkunicyn.market.entities.User;
 import com.igorkunicyn.market.repositories.OrderRepository;
 import com.igorkunicyn.market.entities.Cart;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.util.List;
 public class OrderService {
     private CartService cartService;
     private OrderRepository orderRepository;
+    private Order order;
 
 
     @Autowired
@@ -30,9 +32,35 @@ public class OrderService {
         this.cartService = cartService;
     }
 
+    public Order getOrder() {
+        return order;
+    }
+
+//    @Autowired
+//    public void setOrder(Order order) {
+//        this.order = order;
+//    }
+
     public List<Product> getListProducts(HttpSession httpSession){
         Cart cart = cartService.getCurrentCart(httpSession);
-        Order order = new Order();
+//        order = new Order();
+//        Date date = new Date();
+//        order.setDate(date);
+//        List<Product> productsList = new ArrayList<>(cart.getProductList());
+//
+//        User user = (User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        user.addOrders(order);
+//        order.setNumber(numberOrder(user.getId()) + 1);
+//        for (Product product : productsList) {
+//            order.addProducts(product);
+//        }
+//        orderRepository.save(order);
+        return cart.getProductList();
+    }
+
+    public Order createOrder(HttpSession httpSession){
+        Cart cart = cartService.getCurrentCart(httpSession);
+        order = new Order();
         Date date = new Date();
         order.setDate(date);
         List<Product> productsList = new ArrayList<>(cart.getProductList());
@@ -43,13 +71,11 @@ public class OrderService {
         for (Product product : productsList) {
             order.addProducts(product);
         }
-//        order.setProducts(productsList);
-        orderRepository.save(order);
-        return productsList;
+        return order;
     }
 
     public long numberOrder(Long id){
-        List<Order> orderList = orderRepository.findAllByUserIdOrderByUserId(id);
+        List<Order> orderList = orderRepository.findAllByUserIdOrderByNumber(id);
         if (orderList.isEmpty()){
             return 0;
         }

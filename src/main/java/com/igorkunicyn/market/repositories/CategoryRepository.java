@@ -1,7 +1,6 @@
 package com.igorkunicyn.market.repositories;
 
 import com.igorkunicyn.market.entities.Category;
-import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -9,6 +9,7 @@ import java.util.List;
 @Component
 @Data
 public class Cart {
+
     private List<Product> productList;
     private int totalProducts;
 

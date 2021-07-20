@@ -40,12 +40,13 @@ http://www.thymeleaf.org/extras/spring-security ">
 <!--                    <a class="nav-link" th:href="@{/product/listProducts}">Каталог товаров<span class="sr-only">(current)</span></a>-->
                     <a class="nav-link" th:href="@{/category/list}" onclick="connect()">Каталог товаров<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item" th:classappend="${activeTab == 'ShoppingCart' ? 'active' : ''}">
+                <li class="nav-item" th:classappend="${activeTab == 'Cart
+                ' ? 'active' : ''}">
                     <a class="nav-link" th:href="@{/cart}">Корзина<span class="sr-only">(current)</span></a>
                 </li>
                 <div sec:authorize="isAuthenticated()">
                     <li>
-                    <input id="resultInput" type="text" size="1">
+<!--                    <input id="resultInput" type="text" size="1">-->
                     </li>
                 </div>
                 <div sec:authorize="isAnonymous()">

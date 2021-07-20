@@ -40,12 +40,23 @@ public class ContentCartController {
 
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
-    public Greeting greeting(Message message) throws Exception {
+//    public Greeting greeting(String message) throws Exception {
 
-        String s = String.valueOf(cartService.getCart().getTotalProducts());
-        System.out.println(s);
-        return new Greeting(String.valueOf(cartService.getCart().getTotalProducts()));
+        public Greeting greeting(Message message) throws Exception {
+        Thread.sleep(500);
+        String number = message.getName() + cartService.getCart().getTotalProducts();
+        System.out.println( "   метод greeting");
+        return new Greeting(number + " добавлен в коризну!");
+//        return new Greeting(String.valueOf(cartService.getCart().getTotalProducts()));
+
     }
 
+//    @MessageMapping("/hello")
+//    @SendTo("/topic/greetings")
+//    public int greeting() throws Exception {
+//        int number = cartService.getCart().getTotalProducts();
+//        System.out.println(number + "   метод greeting");
+//        return number;
+//    }
 
 }

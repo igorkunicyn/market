@@ -32,26 +32,15 @@ public class CartService {
     }
 
     public void addCart(Product product, Cart cart) {
-//        int coincidenceTitle = 0;
-//        for (CartElement cartElement : cart.getCartElementList()) {
         for (Product productFromList : cart.getProductList()) {
             if (productFromList.getId() == product.getId()) {
-//            if (cartElement.getProduct().getId() == product.getId()){
-//            if (cartElement.getTitle().equals(product.getTitle())) {
-//                cartElement.setQuantity(cartElement.getQuantity() + 1);
                 productFromList.setQuantity(productFromList.getQuantity() + 1);
                 productFromList.setTotalPrice(productFromList.getTotalPrice() + product.getPrice());
                 cart.setTotalProducts(cart.getTotalProducts() + 1);
-
-//                coincidenceTitle++;
-//                cart.getCartElementList().add(cartElement);
                 return;
             }
         }
-//        CartElement cartElement = new CartElement();
         product.setQuantity(1);
-//        cartElement.setProduct(product);
-//        cartElement.setQuantity(1);
         product.setTotalPrice(product.getPrice());
         cart.getProductList().add(product);
         cart.setTotalProducts(cart.getTotalProducts() + 1);
