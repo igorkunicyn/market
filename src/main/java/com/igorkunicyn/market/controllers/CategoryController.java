@@ -1,11 +1,8 @@
 package com.igorkunicyn.market.controllers;
 
 import com.igorkunicyn.market.entities.Category;
-import com.igorkunicyn.market.entities.Product;
 import com.igorkunicyn.market.services.CategoryService;
-import com.igorkunicyn.market.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

@@ -94,11 +94,6 @@ public class ProductController {
         return "product/new";
     }
 
-//    @RequestMapping(value = "/save", method = RequestMethod.POST)
-//    public String saveProduct(@ModelAttribute("product") Product product) {
-//        productService.saveProduct(product);
-//        return "redirect:/product/listProducts";
-//    }
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveProduct(@ModelAttribute("product") Product product){
         productService.saveProduct(product);

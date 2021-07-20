@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+
 public class CategoryService {
 
     private CategoryRepository categoryRepo;
@@ -32,7 +33,7 @@ public class CategoryService {
 
     public boolean deleteCategory(long id) {
         Category category = categoryRepo.findById(id);
-        if (category != null) {
+        if (category != null && category.getProducts().isEmpty()) {
             categoryRepo.delete(category);
             return true;
         }

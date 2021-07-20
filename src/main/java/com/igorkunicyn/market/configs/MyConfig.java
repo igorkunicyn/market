@@ -17,8 +17,12 @@ public class MyConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:META-INF/resources/webjars/bootstrap/4.1.3/");
         registry.addResourceHandler("/images/**")
                 .addResourceLocations("classpath:/static/images/");
-//        registry.addResourceHandler("/js/**")
-//                .addResourceLocations("classpath:/static/js/main.js");
+        if (!registry.hasMappingForPattern("/pictures/**")) {
+            registry.addResourceHandler("/pictures/**").addResourceLocations("file:pictures/");
+        }
+
+        registry.addResourceHandler("/js/**")
+                .addResourceLocations("classpath:/static/js/");
 
     }
 

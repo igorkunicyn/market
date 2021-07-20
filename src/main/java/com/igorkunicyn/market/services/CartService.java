@@ -1,18 +1,21 @@
 package com.igorkunicyn.market.services;
 
 import com.igorkunicyn.market.entities.Product;
-import com.igorkunicyn.market.utils.Cart;
-import com.igorkunicyn.market.utils.CartElement;
+import com.igorkunicyn.market.entities.Cart;
+//import com.igorkunicyn.market.utils.CartElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Service
 public class CartService {
 
     private Cart cart;
+
+    public Cart getCart() {
+        return cart;
+    }
 
     @Autowired
     public void setCart(Cart cart) {
@@ -20,7 +23,7 @@ public class CartService {
     }
 
     public Cart getCurrentCart(HttpSession session) {
-        Cart cart = ( Cart ) session.getAttribute("cart");
+        cart = ( Cart ) session.getAttribute("cart");
         if (cart == null) {
             cart = new Cart();
             session.setAttribute("cart", cart);
@@ -31,13 +34,15 @@ public class CartService {
     public void addCart(Product product, Cart cart) {
 //        int coincidenceTitle = 0;
 //        for (CartElement cartElement : cart.getCartElementList()) {
-         for (Product productFromList : cart.getProductList()){
-             if (productFromList.getId() == product.getId()){
+        for (Product productFromList : cart.getProductList()) {
+            if (productFromList.getId() == product.getId()) {
 //            if (cartElement.getProduct().getId() == product.getId()){
 //            if (cartElement.getTitle().equals(product.getTitle())) {
 //                cartElement.setQuantity(cartElement.getQuantity() + 1);
                 productFromList.setQuantity(productFromList.getQuantity() + 1);
                 productFromList.setTotalPrice(productFromList.getTotalPrice() + product.getPrice());
+                cart.setTotalProducts(cart.getTotalProducts() + 1);
+
 //                coincidenceTitle++;
 //                cart.getCartElementList().add(cartElement);
                 return;
@@ -49,6 +54,8 @@ public class CartService {
 //        cartElement.setQuantity(1);
         product.setTotalPrice(product.getPrice());
         cart.getProductList().add(product);
+        cart.setTotalProducts(cart.getTotalProducts() + 1);
+
     }
 
     public void deleteFromCart(Cart cart, Product product) {
@@ -56,10 +63,12 @@ public class CartService {
             if (productFromList.getId() == product.getId()) {
                 if (productFromList.getQuantity() == 1) {
                     cart.getProductList().remove(productFromList);
+                    cart.setTotalProducts(cart.getTotalProducts() - 1);
                     return;
                 }
                 productFromList.setQuantity(productFromList.getQuantity() - 1);
                 productFromList.setTotalPrice(productFromList.getTotalPrice() - productFromList.getPrice());
+                cart.setTotalProducts(cart.getTotalProducts() - 1);
                 return;
 //            if (cartElement.getProduct().getId() == product.getId()) {
 //                if (cartElement.getQuantity()==1){
@@ -74,9 +83,9 @@ public class CartService {
         }
     }
 
-    public double totalPriceCart(Cart cart){
+    public double totalPriceCart(Cart cart) {
         double totalPriceCart = 0.0;
-        for (Product product: cart.getProductList()) {
+        for (Product product : cart.getProductList()) {
             totalPriceCart += product.getTotalPrice();
         }
         return totalPriceCart;

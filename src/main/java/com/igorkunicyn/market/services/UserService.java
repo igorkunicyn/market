@@ -13,7 +13,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.ConstraintViolationException;
 import java.util.*;
 
 @Service
@@ -84,7 +86,13 @@ public class UserService implements UserDetailsService {
         user.addRoles(roleRepo.findByName("ROLE_USER"));
 //        user.setRoles(roles);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepo.save(user);
+        try{
+//            userRepo.save(user);
+            userRepo.saveAndFlush(user);
+
+        }catch (ConstraintViolationException e){
+            System.out.println(e.getMessage());
+        }
         return true;
     }
 

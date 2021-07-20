@@ -3,7 +3,7 @@ package com.igorkunicyn.market.controllers;
 import com.igorkunicyn.market.entities.Product;
 import com.igorkunicyn.market.services.CartService;
 import com.igorkunicyn.market.services.ProductService;
-import com.igorkunicyn.market.utils.Cart;
+import com.igorkunicyn.market.entities.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
