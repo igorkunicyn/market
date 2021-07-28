@@ -28,7 +28,6 @@ public class CategoryController {
         return "category/list";
     }
 
-
     @GetMapping("/new")
     public String createNewCategory(Model model) {
         Category category = new Category();

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -82,10 +83,10 @@ public class OrderService {
         return orderList.get(orderList.size()-1).getNumber();
     }
 
-    public double totalPriceOrder(List<Product> productList){
-        double price = 0.0;
+        public BigDecimal totalPriceOrder(List<Product> productList){
+        BigDecimal price = new BigDecimal("0");
         for (Product product: productList) {
-            price += product.getTotalPrice();
+            price.add(product.getTotalPrice());
         }
         return price;
     }

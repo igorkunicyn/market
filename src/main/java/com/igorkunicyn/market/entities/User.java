@@ -26,7 +26,6 @@ public class User implements UserDetails, Serializable {
     @Size(min = 2, max = 10, message = "Имя должно быть в диапазоне от 2 до 10 энаков")
     @Column(name = "username")
     private String username;
-    //    @Size(min = 2, message = "Не меньше 5 знаков")
 
     @NotEmpty(message = "Пароль не может быть пустым")
     @Column(name = "password")

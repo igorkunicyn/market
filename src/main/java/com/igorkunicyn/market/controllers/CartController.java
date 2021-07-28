@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -19,6 +20,12 @@ public class CartController {
 
     private ProductService productService;
     private CartService cartService;
+    private Cart cart;
+
+    @Autowired
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
 
     @Autowired
     public void setProductService(ProductService productService) {
@@ -26,15 +33,16 @@ public class CartController {
     }
 
     @Autowired
-    public void setShopCartService(CartService cartService) {
+    public void setCartService(CartService cartService) {
         this.cartService = cartService;
     }
 
     @GetMapping
     public String cartPage(Model model, HttpSession httpSession) {
-        Cart cart = cartService.getCurrentCart(httpSession);
+        cart = cartService.getCurrentCart(httpSession);
+        if (cart == null) cart = new Cart();
         List<Product> productList = cart.getProductList();
-        double price = cartService.totalPriceCart(cart);
+        BigDecimal price = cartService.totalPriceCart(productList);
         model.addAttribute("price",price);
         model.addAttribute("cartList", productList);
         return "cart-page";
@@ -43,7 +51,7 @@ public class CartController {
     @GetMapping("/add/{id}")
     public String addToCart(@PathVariable("id")Long id, HttpSession httpSession){
         Product product = productService.getProductById(id);
-        Cart cart = cartService.getCurrentCart(httpSession);
+        cart = cartService.getCurrentCart(httpSession);
         cartService.addCart(product, cart);
         return "redirect:/cart";
     }
@@ -51,7 +59,7 @@ public class CartController {
     @GetMapping("/delete/{id}")
     public String deleteFromCart(@PathVariable("id")Long id, HttpSession httpSession){
         Product product = productService.getProductById(id);
-        Cart cart = cartService.getCurrentCart(httpSession);
+        cart = cartService.getCurrentCart(httpSession);
         cartService.deleteFromCart(cart, product);
         return "redirect:/cart";
     }

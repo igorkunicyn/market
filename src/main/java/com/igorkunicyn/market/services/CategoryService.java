@@ -29,7 +29,6 @@ public class CategoryService {
         return categoryRepo.findById(id);
     }
 
-
     public boolean deleteCategory(long id) {
         Category category = categoryRepo.findById(id);
         if (category != null && category.getProducts().isEmpty()) {

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.validation.ConstraintViolationException;
 import java.util.*;
 
-@Service
+//@Service
 public class UserService implements UserDetailsService {
 
     private UserRepository userRepo;
@@ -56,12 +56,12 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepo.findByUsername(username);
-        if (user == null) {
+        User myUser = userRepo.findByUsername(username);
+        if (myUser == null) {
             throw new UsernameNotFoundException("User not found");
 
         }
-        return user;
+        return myUser;
     }
 
     public User findUserById(Long userId) {

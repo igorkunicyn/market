@@ -16,7 +16,6 @@ http://www.thymeleaf.org/extras/spring-security ">
     <script type="text/javascript"  th:src="@{/webjars/stomp-websocket/2.3.3/stomp.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/script.js}"></script>
 
-
 </head>
 <body>
 
@@ -38,15 +37,16 @@ http://www.thymeleaf.org/extras/spring-security ">
                 <!--                </li>-->
                 <li class="nav-item" th:classappend="${activeTab == 'Product' ? 'active' : ''}">
 <!--                    <a class="nav-link" th:href="@{/product/listProducts}">Каталог товаров<span class="sr-only">(current)</span></a>-->
-                    <a class="nav-link" th:href="@{/category/list}" onclick="connect()">Каталог товаров<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" th:href="@{/category/list}" >Каталог товаров<span class="sr-only">(current)</span></a>
+<!--                    <a class="nav-link" th:href="@{/category/list}" onclick="sendNumber();">Каталог товаров<span class="sr-only">(current)</span></a>-->
+
                 </li>
-                <li class="nav-item" th:classappend="${activeTab == 'Cart
-                ' ? 'active' : ''}">
+                <li class="nav-item" th:classappend="${activeTab == 'Product' ? 'active' : ''}">
                     <a class="nav-link" th:href="@{/cart}">Корзина<span class="sr-only">(current)</span></a>
                 </li>
                 <div sec:authorize="isAuthenticated()">
-                    <li>
-<!--                    <input id="resultInput" type="text" size="1">-->
+                    <li class="nav-item" th:classappend="${activeTab == 'Product' ? 'active' : ''}">
+                    <input id="resultInput" type="text" size="1">
                     </li>
                 </div>
                 <div sec:authorize="isAnonymous()">

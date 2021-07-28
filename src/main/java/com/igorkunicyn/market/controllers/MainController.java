@@ -9,7 +9,8 @@ public class MainController {
 
     @RequestMapping("/")
     public String showHomePage(){
-       return "index";
+
+        return "index";
     }
 
 }

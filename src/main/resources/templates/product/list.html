@@ -63,7 +63,7 @@
             <td th:text="${product.titleRussian}">Название товара</td>
             <td th:text="${product.price}">Цена товара</td>
             <td>
-                &nbsp;&nbsp;&nbsp; <a th:href="@{'/cart/add/' + ${product.id}}" class="btn btn-primary" onclick="sendName();">Добавить товар в корзину</a>
+                &nbsp;&nbsp;&nbsp; <a th:href="@{'/cart/add/' + ${product.id}}" class="btn btn-primary" onclick="sendNumber();">Добавить товар в корзину</a>
 <!--                <button id="connect" onclick="connect();" >Добавить товар в корзину</button>-->
 
             </td>
