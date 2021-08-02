@@ -4,7 +4,6 @@ import com.igorkunicyn.market.entities.Category;
 import com.igorkunicyn.market.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

@@ -20,7 +20,6 @@ public class MyConfig implements WebMvcConfigurer {
         if (!registry.hasMappingForPattern("/pictures/**")) {
             registry.addResourceHandler("/pictures/**").addResourceLocations("file:pictures/");
         }
-
         registry.addResourceHandler("/js/**")
                 .addResourceLocations("classpath:/static/js/");
 

@@ -10,5 +10,4 @@ public class Greeting {
     public Greeting(String content){
         this.content = content;
     }
-//    public Greeting(){}
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order,Long> {
     Order save(Order o);
 
-    List<Order> findAllByUserIdOrderByNumberDesc(Long userId);
-    List<Order> findAllByUserIdOrderByUserId(Long userId);
+    List<Order> findAllByUserIdOrderByNumber(Long userId);
+//    List<Order> findAllByUserIdOrderByUserId(Long userId);
 
 }

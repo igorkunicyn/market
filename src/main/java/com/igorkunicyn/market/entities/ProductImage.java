@@ -22,4 +22,5 @@ public class ProductImage {
     private Product product;
 
     public ProductImage(){}
+
 }

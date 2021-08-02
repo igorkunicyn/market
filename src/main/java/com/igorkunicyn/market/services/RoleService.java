@@ -18,5 +18,4 @@ public class RoleService {
     public Role findRoleBiName(String name){
         return roleRepo.findByName(name);
     }
-
 }

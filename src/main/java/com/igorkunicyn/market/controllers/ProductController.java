@@ -38,22 +38,9 @@ public class ProductController {
         return "Product with id = " + id + " not exists";
     }
 
-//    @GetMapping("/listProducts")
-//    public String listProducts(Model Model) {
-//        return pageProducts(1,Model);
-//    }
-
     @GetMapping("/list/{categoryId}")
-    public String createListProductsFromCategory(@PathVariable(name = "categoryId")long categoryId, Model model) {
-
-//        ModelAndView modelAndView = new ModelAndView("product/list");
-//        int pageNum = 1;
-//        Page<Product> productPage = productService.findPaginated(pageNum,id);
-//        List<Product> productList = productPage.getContent();
-//        modelAndView.addObject("currentPage", pageNum);
-//        modelAndView.addObject("totalPages", productPage.getTotalPages());
-//        modelAndView.addObject("totalItems", productPage.getTotalElements());
-//        modelAndView.addObject("listProducts", productList);
+    public String createListProductsFromCategory(@PathVariable(name = "categoryId")long categoryId,
+                                                 Model model) {
         return pageProducts(1,model,categoryId);
     }
 
