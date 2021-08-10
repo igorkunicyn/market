@@ -5,7 +5,9 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -26,13 +28,14 @@ public class Product implements Serializable {
     private String titleRussian;
 
     @Column(name = "price")
-    private double price;
+    @NotNull
+    private BigDecimal price;
 
     @Transient
     private long quantity;
 
     @Transient
-    private double totalPrice;
+    private BigDecimal totalPrice;
 
 //    @Transient
 //    @ManyToMany(mappedBy = "products")
@@ -73,5 +76,10 @@ public class Product implements Serializable {
     }
 
     public Product() {
+    }
+
+    public Product(String titleEnglish, BigDecimal price ){
+        this.titleEnglish = titleEnglish;
+        this.price = price;
     }
 }

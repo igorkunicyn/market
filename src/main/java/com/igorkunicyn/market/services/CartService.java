@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CartService {
@@ -16,6 +19,7 @@ public class CartService {
     public Cart getCart() {
         return cart;
     }
+
 
     @Autowired
     public void setCart(Cart cart) {
@@ -31,32 +35,34 @@ public class CartService {
         return cart;
     }
 
-    public void addCart(Product product, Cart cart) {
+    public Cart addCart(Product product, Cart cart) {
         for (Product productFromList : cart.getProductList()) {
-            if (productFromList.getId() == product.getId()) {
+            if (productFromList.equals(product)) {
                 productFromList.setQuantity(productFromList.getQuantity() + 1);
-                productFromList.setTotalPrice(productFromList.getTotalPrice() + product.getPrice());
+                productFromList.setTotalPrice(productFromList.getTotalPrice()
+                        .add(product.getPrice()));
                 cart.setTotalProducts(cart.getTotalProducts() + 1);
-                return;
+                return cart;
             }
         }
         product.setQuantity(1);
         product.setTotalPrice(product.getPrice());
         cart.getProductList().add(product);
         cart.setTotalProducts(cart.getTotalProducts() + 1);
-
+        return cart;
     }
 
     public void deleteFromCart(Cart cart, Product product) {
         for (Product productFromList : cart.getProductList()) {
-            if (productFromList.getId() == product.getId()) {
+            if (productFromList.equals(product)) {
                 if (productFromList.getQuantity() == 1) {
                     cart.getProductList().remove(productFromList);
                     cart.setTotalProducts(cart.getTotalProducts() - 1);
                     return;
                 }
                 productFromList.setQuantity(productFromList.getQuantity() - 1);
-                productFromList.setTotalPrice(productFromList.getTotalPrice() - productFromList.getPrice());
+                productFromList.setTotalPrice(productFromList.getTotalPrice()
+                        .subtract(productFromList.getPrice()));
                 cart.setTotalProducts(cart.getTotalProducts() - 1);
                 return;
 //            if (cartElement.getProduct().getId() == product.getId()) {
@@ -72,11 +78,14 @@ public class CartService {
         }
     }
 
-    public double totalPriceCart(Cart cart) {
-        double totalPriceCart = 0.0;
-        for (Product product : cart.getProductList()) {
-            totalPriceCart += product.getTotalPrice();
+    public BigDecimal totalPriceCart(List<Product> list) {
+        List<BigDecimal> price = new ArrayList<>();
+        for (Product product : list) {
+            price.add(product.getTotalPrice());
         }
-        return totalPriceCart;
+        return price.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
+
     }
+
+
 }

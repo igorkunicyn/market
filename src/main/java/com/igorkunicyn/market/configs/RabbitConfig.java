@@ -15,7 +15,6 @@ import java.util.logging.Logger;
 
 @Configuration
 @EnableRabbit
-//@EnableAutoConfiguration
 public class RabbitConfig {
     private static final Logger logger = Logger.getLogger(RabbitConfig.class.getName());
     private static final String EXCHANGE_NAME= "exchange-market";

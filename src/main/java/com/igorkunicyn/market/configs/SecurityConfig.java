@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
@@ -20,12 +21,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableAspectJAutoProxy
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private UserService userService;
-
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
+//    private UserService userService;
+//
+//    @Autowired
+//    public void setUserService(UserService userService) {
+//        this.userService = userService;
+//    }
+//    @Autowired
+//    public SecurityConfig(UserService userService){
+//        this.userService = userService;
+//    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -66,9 +71,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .logoutSuccessUrl("/");
     }
-
+    @Override
+    @Bean
+    public UserDetailsService userDetailsServiceBean() throws Exception{
+        return new UserService();
+    }
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
+        auth.userDetailsService(userDetailsServiceBean()).passwordEncoder(bCryptPasswordEncoder());
     }
 }

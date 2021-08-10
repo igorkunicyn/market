@@ -66,5 +66,4 @@ public class ProductService {
         category.removeProduct(product);
         productRepo.delete(product);
     }
-
 }

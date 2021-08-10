@@ -17,12 +17,6 @@ public class RabbitService {
 
     private static Logger logger = Logger.getLogger(RabbitService.class.getName());
     private OrderRepository orderRepo;
-//    private RabbitTemplate rabbitTemplate;
-
-//    @Autowired
-//    public void setRabbitTemplate(RabbitTemplate rabbitTemplate) {
-//        this.rabbitTemplate = rabbitTemplate;
-//    }
 
     @Autowired
     public void setOrderRepo(OrderRepository orderRepo) {

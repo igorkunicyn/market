@@ -22,7 +22,6 @@ public class Role implements GrantedAuthority, Serializable {
     @Column(name = "name")
     private String name;
 
-//    @Transient
     @ManyToMany(mappedBy = "roles")
     private List<User> users = new ArrayList<>();
 

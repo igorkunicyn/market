@@ -43,8 +43,6 @@
         <h2>Регистрация</h2>
         <form action="#" th:action="@{/registration}" method="post" th:object="${userForm}">
 
-
-
             <label for="username">Имя пользователя:</label>
             <input type="text" th:field="*{username}" id="username"/><br>
             <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Usrename error </div>

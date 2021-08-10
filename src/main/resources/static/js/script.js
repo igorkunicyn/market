@@ -3,23 +3,19 @@ var stompClient = null;
 window.onload = connect();
 
 function connect() {
-    var socket = new SockJS('/hello');
+    var socket = new SockJS('/content');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame) {
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings', function(greeting){
-            showGreeting(JSON.parse(greeting.body).content);
-//            var result = '2'
-//                document.getElementById("resultInput").value=greeting.body;
-
+        stompClient.subscribe('/topic/numberProducts', function(contentCart){
+            showGreeting(JSON.parse(contentCart.body));
         });
     });
 }
 
-function sendName() {
+function sendNumber() {
     var name = '0';
-//    stompClient.send("/app/hello", {}, {});
-    stompClient.send("/app/hello", {}, JSON.stringify({ 'name': name }));
+    stompClient.send("/app/content", {}, {});
 
 }
 

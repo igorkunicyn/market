@@ -36,5 +36,4 @@ public class AdminController {
         userService.editUser(id);
         return "redirect:/admin/users";
     }
-
 }

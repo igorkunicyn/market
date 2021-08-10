@@ -26,7 +26,6 @@ public class Order implements Serializable {
     @Column(name = "number")
     private long number;
 
-
     @ManyToMany(cascade = {CascadeType.MERGE})
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "orders_products", joinColumns = {@JoinColumn(name = "order_id")},

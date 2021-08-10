@@ -18,14 +18,15 @@
 
 </head>
 <body>
-<div th:replace="~{navigation :: navi(Cart)}"/>
+<!--<div th:replace="~{navigation :: navi(Cart)}"/>-->
+<div th:replace="~{navigation :: navi(Product)}"/>
 
 <div class="container" align="center">
     <br>
-    <button type="button"  class="btn btn-primary" id="connect" th:onclick="connect();">Connect</button>
+<!--    <button type="button"  class="btn btn-primary" id="connect" th:onclick="connect();">Connect</button>-->
 <!--    <button type="button" class="btn bnt-primary" id="sendName" onclick="sendName()">Send</button>-->
 <!--    <input id="result" name="result" type="text" size="40">-->
-    <input id="resultInput" name="resultInput" type="text" size="40">
+<!--    <input id="resultInput" name="resultInput" type="text" size="40">-->
 
 
 
@@ -53,7 +54,7 @@
             <td th:text="${product.totalPrice}">Итого по данному товара</td>
 
             <td>
-                <a th:href="@{'/cart/delete/' + ${product.id}}">Удалить товар</a>
+                <a th:href="@{'/cart/delete/' + ${product.id}}" class="btn btn-primary" onclick="sendNumber();">Удалить товар</a>
                 &nbsp;&nbsp;&nbsp;
             </td>
         </tr>
