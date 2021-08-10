@@ -16,4 +16,5 @@ public class Cart {
         productList = new ArrayList<>();
         totalProducts = 0;
     }
+
 }

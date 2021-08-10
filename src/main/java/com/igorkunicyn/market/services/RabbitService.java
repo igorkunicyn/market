@@ -27,7 +27,6 @@ public class RabbitService {
     public void order(Order order){
         logger.info("wait  order :" );
         //        Order order = (Order ) rabbitTemplate.receiveAndConvert();
-        if (order == null) System.out.println("order is empty");;
         orderRepo.save(order);
 
     }

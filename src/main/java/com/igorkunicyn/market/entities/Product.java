@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -36,10 +35,6 @@ public class Product implements Serializable {
 
     @Transient
     private BigDecimal totalPrice;
-
-//    @Transient
-//    @ManyToMany(mappedBy = "products")
-//    private List<Order> orders;
 
     @ManyToMany(mappedBy = "products")
     @LazyCollection(LazyCollectionOption.FALSE)

@@ -65,15 +65,6 @@ public class CartService {
                         .subtract(productFromList.getPrice()));
                 cart.setTotalProducts(cart.getTotalProducts() - 1);
                 return;
-//            if (cartElement.getProduct().getId() == product.getId()) {
-//                if (cartElement.getQuantity()==1){
-//                    cart.getCartElementList().remove(cartElement);
-//                    return;
-//                }
-//                cartElement.setQuantity(cartElement.getQuantity() - 1);
-//                cartElement.setTotalPrice(cartElement.getTotalPrice()- cartElement.getProduct().getPrice());
-//                return;
-//            }
             }
         }
     }
