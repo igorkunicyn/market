@@ -1,7 +1,6 @@
 package com.igorkunicyn.market.entities;
 
 import lombok.Data;
-import org.hibernate.annotations.GeneratorType;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;

@@ -44,14 +44,11 @@ public class User implements UserDetails, Serializable {
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "users_roles", joinColumns = {@JoinColumn(name = "user_id")},
     inverseJoinColumns = {@JoinColumn(name = "role_id")})
-//    private Set<Role> roles = new HashSet<>();
     private List<Role> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
-//    @JoinColumn(name = "user_id")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Order> orders = new ArrayList<>();
-//    private Set<Order> orders = new HashSet<>();
 
     public void addOrders(Order order){
         orders.add(order);

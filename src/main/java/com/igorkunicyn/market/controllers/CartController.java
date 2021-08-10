@@ -63,5 +63,4 @@ public class CartController {
         cartService.deleteFromCart(cart, product);
         return "redirect:/cart";
     }
-
 }

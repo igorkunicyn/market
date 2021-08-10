@@ -1,3 +1,6 @@
+--DROP DATABASE if exists spring;
+--
+--CREATE database spring;
 
 DROP TABLE IF EXISTS users;
 

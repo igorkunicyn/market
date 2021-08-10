@@ -44,10 +44,6 @@ public class UserService implements UserDetailsService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-//    @Autowired
-//    private EntityManager em;
-
-
     public Page<User> findPaginated(int pageNum) {
         int pageSize = 5;
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
@@ -78,16 +74,10 @@ public class UserService implements UserDetailsService {
         if (userFromDb != null) {
             return false;
         }
-//        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
-//        Set<Role> roles = new HashSet<>();
-//        roles.add(new Role(1L, "ROLE_USER"));
         user.addRoles(roleRepo.findByName("ROLE_USER"));
-//        user.setRoles(roles);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         try{
-//            userRepo.save(user);
             userRepo.saveAndFlush(user);
-
         }catch (ConstraintViolationException e){
             System.out.println(e.getMessage());
         }

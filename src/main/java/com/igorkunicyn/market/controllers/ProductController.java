@@ -43,22 +43,9 @@ public class ProductController {
         return pageProducts(1,model,categoryId);
     }
 
-//    @GetMapping(value = "/page/{pageNum}")
-//    public String pageProducts(@PathVariable(name = "pageNum") int pageNum, Model uiModel) {
-//        Page<Product> productPage = productService.findPaginated(pageNum);
-//        List<Product> productList = productPage.getContent();
-//        uiModel.addAttribute("currentPage", pageNum);
-//        uiModel.addAttribute("totalPages", productPage.getTotalPages());
-//        uiModel.addAttribute("totalItems", productPage.getTotalElements());
-//        uiModel.addAttribute("listProducts", productList);
-//        return "product/list";
-//
-//    }
     @GetMapping(value = "/list/{categoryId}/page/{pageNum}")
     public String pageProducts(@PathVariable(name = "pageNum") int pageNum, Model model,
                                @PathVariable(name = "categoryId") long categoryId) {
-//    @GetMapping(value = "/page/{pageNum}")
-//    public String pageProducts(@PathVariable(name = "pageNum") int pageNum, Model model, long id) {
         Page<Product> productPage = productService.findPaginated(pageNum, categoryId);
         List<Product> productList = productPage.getContent();
         model.addAttribute("currentPage", pageNum);
@@ -71,7 +58,6 @@ public class ProductController {
     }
 
     @GetMapping("/list/{categoryId}/new")
-//    @GetMapping("/new")
     public String createNewProduct(@PathVariable(name = "categoryId")long categoryId, Model model) {
         Product product = new Product();
         Category category = categoryService.getCategoryById(categoryId);

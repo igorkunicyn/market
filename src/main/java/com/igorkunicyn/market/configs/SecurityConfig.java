@@ -21,16 +21,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableAspectJAutoProxy
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    private UserService userService;
-//
-//    @Autowired
-//    public void setUserService(UserService userService) {
-//        this.userService = userService;
-//    }
-//    @Autowired
-//    public SecurityConfig(UserService userService){
-//        this.userService = userService;
-//    }
+    @Bean
+    public UserDetailsService userDetailsServiceBean() throws Exception{
+        return new UserService();
+    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -70,11 +64,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll()
                 .logoutSuccessUrl("/");
-    }
-    @Override
-    @Bean
-    public UserDetailsService userDetailsServiceBean() throws Exception{
-        return new UserService();
     }
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
